@@ -20,15 +20,50 @@ const UserSelection = ({ recommendedUsers, onNext }) => {
 
   return (
     <div className="step-container">
-      <h1>Select Users for Your System</h1>
-      {recommendedUsers.map((user) => (
-        <FormControlLabel
-          key={user}
-          control={<Checkbox name={user} onChange={handleChange} />}
-          label={user}
-        />
-      ))}
-      <button onClick={handleNext}>Next</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h3>Select Users for Your System</h3>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center vertically within the parent
+          alignItems: "center", // Center horizontally
+          flexWrap: "wrap", // Allow items to wrap onto the next line if necessary
+          gap: "8px", // Add some spacing between checkboxes
+          width: "90%", // Allow it to expand within the container
+          margin: "0 auto", // Center the div horizontally
+          height: "auto", // Let the height adjust based on the content
+          marginTop: "3vh",
+        }}
+      >
+        {recommendedUsers.map((user) => (
+          <FormControlLabel
+            key={user}
+            control={<Checkbox name={user} onChange={handleChange} />}
+            label={user}
+          />
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "5vh",
+        }}
+      >
+        <button onClick={handleNext} className="styled-button">
+          Next
+        </button>
+      </div>
     </div>
   );
 };

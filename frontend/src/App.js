@@ -15,7 +15,28 @@ const App = () => {
   const [requirements, setRequirements] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
-  const recommendedUsers = ["Admin", "User", "Manager"];
+  const recommendedUsers = [
+    "Admin",
+    "User",
+    "Manager",
+    "Guest",
+    "Editor",
+    "Viewer",
+    "Moderator",
+    "Contributor",
+    "Support",
+    "Developer",
+    "Designer",
+    "Project Manager",
+    "Team Lead",
+    "Quality Assurance",
+    "Product Owner",
+    "Business Analyst",
+    "Customer",
+    "Sales Representative",
+    "HR",
+    "Finance",
+  ];
 
   const handleNext = (data) => {
     if (step === 1) {
@@ -64,7 +85,6 @@ const App = () => {
           position: "absolute",
           bottom: "20px",
           left: "20px",
-          fontSize: "24px",
           cursor: "pointer",
           color: "#658e3c76",
         }}
