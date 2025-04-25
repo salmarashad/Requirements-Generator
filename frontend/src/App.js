@@ -44,12 +44,25 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <div
+        style={{
+          fontSize: "50px",
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          color: "#658e3c76",
+        }}
+      >
+        〄
+      </div>
       {/* Info icon */}
       <div
         onClick={togglePopup}
         style={{
           position: "absolute",
-          top: "20px",
+          bottom: "20px",
           left: "20px",
           fontSize: "24px",
           cursor: "pointer",
@@ -71,7 +84,7 @@ const App = () => {
           style={{
             position: "absolute",
             bottom: "20px",
-            left: "20px",
+            left: "50px",
             fontSize: "24px",
             cursor: "pointer",
             color: "#658e3c76",
