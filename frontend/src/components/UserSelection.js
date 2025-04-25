@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Chip } from "@mui/material";
 
 const UserSelection = ({ recommendedUsers, onNext }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
 
-  const handleChange = (event) => {
-    const user = event.target.name;
-    setSelectedUsers((prevState) => {
-      if (prevState.includes(user)) {
-        return prevState.filter((item) => item !== user);
+  const handleChange = (user) => {
+    setSelectedUsers((prevSelectedUsers) => {
+      if (prevSelectedUsers.includes(user)) {
+        // Remove user from selectedUsers
+        return prevSelectedUsers.filter((u) => u !== user);
+      } else {
+        // Add user to selectedUsers
+        return [...prevSelectedUsers, user];
       }
-      return [...prevState, user];
     });
   };
 
@@ -37,17 +39,28 @@ const UserSelection = ({ recommendedUsers, onNext }) => {
           alignItems: "center", // Center horizontally
           flexWrap: "wrap", // Allow items to wrap onto the next line if necessary
           gap: "8px", // Add some spacing between checkboxes
-          width: "90%", // Allow it to expand within the container
+          width: "80%", // Allow it to expand within the container
           margin: "0 auto", // Center the div horizontally
           height: "auto", // Let the height adjust based on the content
           marginTop: "3vh",
         }}
       >
         {recommendedUsers.map((user) => (
-          <FormControlLabel
+          <Chip
             key={user}
-            control={<Checkbox name={user} onChange={handleChange} />}
             label={user}
+            clickable
+            color={selectedUsers.includes(user) ? "#658e3c76" : "primary"}
+            onClick={() => handleChange(user)}
+            style={{
+              margin: "4px",
+              fontFamily: "IBM Plex Mono",
+              backgroundColor: selectedUsers.includes(user)
+                ? "#4a8cce" // if selected
+                : "#6caad7", //  unselected state
+              color: "#fff",
+              fontSize: "18px",
+            }}
           />
         ))}
       </div>

@@ -66,6 +66,7 @@ const App = () => {
   return (
     <div className="app-container">
       <div
+        //  onClick={}
         style={{
           fontSize: "50px",
           position: "absolute",
@@ -86,6 +87,7 @@ const App = () => {
           bottom: "20px",
           left: "20px",
           cursor: "pointer",
+          fontSize: "30px",
           color: "#658e3c76",
         }}
       >
@@ -104,8 +106,8 @@ const App = () => {
           style={{
             position: "absolute",
             bottom: "20px",
-            left: "50px",
-            fontSize: "24px",
+            left: "60px",
+            fontSize: "30px",
             cursor: "pointer",
             color: "#658e3c76",
           }}
