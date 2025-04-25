@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import { FaInfoCircle, FaGithub } from "react-icons/fa";
+import AboutPopup from "./components/AboutPopup"; // Importing the new component
 import ProjectDescription from "./components/ProjectDescription";
 import UserSelection from "./components/UserSelection";
 import AddCustomUsers from "./components/AddCustomUsers";
 import RequirementForm from "./components/RequirementForm";
+import "./App.css";
 
 const App = () => {
-  const [step, setStep] = useState(1); // Keeps track of the current step
+  const [step, setStep] = useState(1);
   const [projectDescription, setProjectDescription] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [customUsers, setCustomUsers] = useState([]);
   const [requirements, setRequirements] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
-  // Recommended users based on the project description
   const recommendedUsers = ["Admin", "User", "Manager"];
 
   const handleNext = (data) => {
-    // Process data for each step and move to the next step
     if (step === 1) {
       setProjectDescription(data);
       setStep(2);
@@ -32,45 +34,88 @@ const App = () => {
   };
 
   const handleSubmitRequirements = (data) => {
-    // Here, you could generate the functional and non-functional requirements
     console.log("Generated Requirements:", data);
-    setStep(6); // Move to a "success" or final step
+    setStep(6);
+  };
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
   };
 
   return (
     <div className="app-container">
-      <h1>Your Project Requirements Generator</h1>
+      {/* Info icon */}
+      <div
+        onClick={togglePopup}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          fontSize: "24px",
+          cursor: "pointer",
+          color: "#658e3c76",
+        }}
+      >
+        <FaInfoCircle />
+      </div>
+
+      {/* Popup Modal */}
+      <AboutPopup showPopup={showPopup} togglePopup={togglePopup} />
+
+      {/* GitHub Icon */}
+      <div>
+        <a
+          href="https://github.com/salmarashad/Thesis-Project"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            left: "20px",
+            fontSize: "24px",
+            cursor: "pointer",
+            color: "#658e3c76",
+          }}
+        >
+          <FaGithub />
+        </a>
+      </div>
+
+      {/* Main Content */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "25vh",
+          fontWeight: "bold",
+        }}
+      >
+        <h1>Requirements Generator</h1>
+      </div>
 
       {step === 1 && <ProjectDescription onNext={handleNext} />}
-
       {step === 2 && (
         <UserSelection
           recommendedUsers={recommendedUsers}
           onNext={handleNext}
         />
       )}
-
       {step === 3 && <AddCustomUsers onNext={handleNext} />}
-
       {step === 4 && (
         <RequirementForm
-          users={[...selectedUsers, ...customUsers]} // Combine selected and custom users
-          preFilledRequirements={[]}
+          users={[...selectedUsers, ...customUsers]}
           onSubmit={handleSubmitRequirements}
         />
       )}
-
       {step === 5 && (
         <div>
           <h2>Generating Your Requirements...</h2>
-          {/* You can show a loader here */}
         </div>
       )}
-
       {step === 6 && (
         <div>
           <h2>Your Functional and Non-Functional Requirements</h2>
-          {/* Display the generated requirements here */}
           <pre>{JSON.stringify(requirements, null, 2)}</pre>
         </div>
       )}

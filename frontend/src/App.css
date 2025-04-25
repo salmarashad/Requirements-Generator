@@ -12,6 +12,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+body {
+  background-color: #fdf6e3;
+  margin: 0;
+}
 
 .App-header {
   background-color: #282c34;
@@ -35,4 +39,54 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* Container for the form elements */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Adds spacing between the textarea and button */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fdf6e3; /* Light background */
+  border-radius: 10px;
+}
+
+/* Stylish Textarea */
+.styled-textarea {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  outline: none;
+  resize: vertical; /* Allows resizing only vertically */
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+.styled-textarea:focus {
+  border-color: #658e3c76; /* Slight blue color on focus */
+  box-shadow: 0 0 8px rgba(55, 166, 200, 0.3); /* Focus shadow */
+}
+
+/* Button Styling */
+.styled-button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #658e3c76; /* Dirty green color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.styled-button:hover {
+  background-color: #3e5a28; /* Darker shade on hover */
+}
+
+.styled-button:active {
+  background-color: #335021; /* Even darker shade on active */
 }

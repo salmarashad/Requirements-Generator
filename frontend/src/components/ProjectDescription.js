@@ -11,13 +11,28 @@ const ProjectDescription = ({ onNext }) => {
 
   return (
     <div className="step-container">
-      <h1>Describe Your Project</h1>
-      <textarea
-        placeholder="Enter a brief description of your project"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={handleNext}>Next</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h3>Describe Your Project</h3>
+      </div>
+
+      <div className="form-container">
+        <textarea
+          placeholder="Enter a brief description of your project"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="styled-textarea"
+        />
+
+        <button onClick={handleNext} className="styled-button">
+          Next
+        </button>
+      </div>
     </div>
   );
 };
