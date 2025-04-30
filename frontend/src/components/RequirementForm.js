@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const RequirementForm = ({ users, preFilledRequirements, onSubmit }) => {
-  const [requirements, setRequirements] = useState(preFilledRequirements);
+  const [requirements, setRequirements] = useState(preFilledRequirements || []);
 
   const handleChange = (index, field, value) => {
     const updatedRequirements = [...requirements];
