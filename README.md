@@ -10,6 +10,8 @@ This tool helps software development teams quickly create requirements documents
 - Generating user stories
 - Converting stories into formal requirements
 
+ <img src="main-page-view.png" alt="main page" />
+
 ## Tech Stack
 
 - Frontend: React
