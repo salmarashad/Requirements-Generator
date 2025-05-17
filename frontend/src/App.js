@@ -8,6 +8,7 @@ import RequirementForm from "./components/RequirementForm";
 import apiService from "./apiService";
 import "./App.css";
 import ReactMarkdown from "react-markdown";
+import { FaCopy, FaDownload } from "react-icons/fa";
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -19,6 +20,22 @@ const App = () => {
   const [generatedRoles, setGeneratedRoles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(requirements).then(() => {
+      alert("Requirements copied to clipboard!");
+    });
+  };
+
+  const downloadRequirements = () => {
+    const element = document.createElement("a");
+    const file = new Blob([requirements], { type: "text/markdown" });
+    element.href = URL.createObjectURL(file);
+    element.download = "requirements.md";
+    document.body.appendChild(element); // Required for Firefox
+    element.click();
+    document.body.removeChild(element);
+  };
 
   // default user roles as fallback
   const defaultUserRoles = [
@@ -185,9 +202,47 @@ const App = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              gap: "1rem",
+              marginBottom: "1rem",
             }}
           >
             <h3>Your Functional and Non-Functional Requirements</h3>
+            <button
+              onClick={copyToClipboard}
+              style={{
+                cursor: "pointer",
+                border: "none",
+                background: "transparent",
+                color: "#658e3c",
+                opacity: 0.6,
+                fontSize: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.25rem",
+              }}
+              title="Copy requirements"
+              aria-label="Copy requirements"
+            >
+              <FaCopy />
+            </button>
+            <button
+              onClick={downloadRequirements}
+              style={{
+                cursor: "pointer",
+                border: "none",
+                background: "transparent",
+                color: "#658e3c",
+                opacity: 0.6,
+                fontSize: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.25rem",
+              }}
+              title="Download requirements"
+              aria-label="Download requirements"
+            >
+              <FaDownload />
+            </button>
           </div>
 
           <div
@@ -199,6 +254,7 @@ const App = () => {
               maxWidth: "900px",
               margin: "2rem auto",
               maxHeight: "70vh",
+              opacity: 0.6,
               overflowY: "auto",
               boxShadow: "0 8px 20px rgba(0, 0, 0, 0.05)",
               border: "1px solid #dfe8d9",
