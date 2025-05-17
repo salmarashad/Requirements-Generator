@@ -17,6 +17,11 @@ const UserSelection = ({ recommendedUsers, onNext }) => {
   };
 
   const handleNext = () => {
+    // Ensure at least one user is selected
+    if (selectedUsers.length === 0) {
+      alert("Please select at least one user role");
+      return;
+    }
     onNext(selectedUsers);
   };
 
@@ -45,24 +50,32 @@ const UserSelection = ({ recommendedUsers, onNext }) => {
           marginTop: "3vh",
         }}
       >
-        {recommendedUsers.map((user) => (
-          <Chip
-            key={user}
-            label={user}
-            clickable
-            color={selectedUsers.includes(user) ? "#658e3c76" : "primary"}
-            onClick={() => handleChange(user)}
-            style={{
-              margin: "4px",
-              fontFamily: "IBM Plex Mono",
-              backgroundColor: selectedUsers.includes(user)
-                ? "#4a8cce" // if selected
-                : "#6caad7", //  unselected state
-              color: "#fff",
-              fontSize: "18px",
-            }}
-          />
-        ))}
+        {recommendedUsers && recommendedUsers.length > 0 ? (
+          recommendedUsers.map((user) => (
+            <Chip
+              key={user}
+              label={user}
+              clickable
+              color={selectedUsers.includes(user) ? "#658e3c76" : "primary"}
+              onClick={() => handleChange(user)}
+              style={{
+                margin: "4px",
+                fontFamily: "IBM Plex Mono",
+                backgroundColor: selectedUsers.includes(user)
+                  ? "#4a8cce" // if selected
+                  : "#6caad7", //  unselected state
+                color: "#fff",
+                fontSize: "18px",
+              }}
+            />
+          ))
+        ) : (
+          <p>No user roles available. Please go back and try again.</p>
+        )}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <p>Selected {selectedUsers.length} user roles</p>
       </div>
 
       <div

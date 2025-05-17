@@ -1,11 +1,28 @@
 import React, { useState } from "react";
+import apiService from "../apiService";
 
 const ProjectDescription = ({ onNext }) => {
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (description.trim()) {
-      onNext(description);
+      setLoading(true);
+      setError(null);
+
+      try {
+        localStorage.setItem("projectDescription", description);
+
+        const response = await apiService.generateRoles(description);
+
+        onNext(description);
+      } catch (err) {
+        setError("Failed to process your description. Please try again.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -29,9 +46,19 @@ const ProjectDescription = ({ onNext }) => {
           className="styled-textarea"
         />
 
-        <button onClick={handleNext} className="styled-button">
-          Next
-        </button>
+        {error && (
+          <div style={{ color: "red", marginBottom: "1rem" }}>{error}</div>
+        )}
+
+        {loading ? (
+          <div style={{ marginTop: "1rem" }}>
+            <p>Processing your description...</p>
+          </div>
+        ) : (
+          <button onClick={handleNext} className="styled-button">
+            Next
+          </button>
+        )}
       </div>
     </div>
   );
